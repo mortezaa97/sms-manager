@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mortezaa97\SmsManager;
 
 use Filament\Contracts\Plugin;
+use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Mortezaa97\SmsManager\Filament\Resources\SmsMessages\SmsMessageResource;
 use Mortezaa97\SmsManager\Filament\Widgets\SmsManagerStatsWidget;
@@ -42,6 +43,10 @@ class SmsManagerPlugin implements Plugin
             ])
             ->widgets([
                 SmsManagerStatsWidget::class,
+            ])->navigationGroups([
+                NavigationGroup::make('پنل پیامکی')
+                    ->icon('heroicon-o-phone')
+                    ->collapsed(),
             ]);
     }
 

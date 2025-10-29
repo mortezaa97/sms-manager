@@ -26,7 +26,7 @@ class SmsManagerStatsWidget extends BaseWidget
         $successRate = $total > 0 ? round(($sent / $total) * 100) : 0;
 
         // Placeholder: Fetch actual SMS credit from provider here if possible
-        $remainingCredit = number_format(100000 - $sentQuery->sum('cost')) . ' تومان';
+        $remainingCredit = number_format(100000 - ($sentQuery->sum('cost')/10)) . ' تومان';
 
         // Generate past 7 days' dates (including today), oldest first
         $dates = collect();
