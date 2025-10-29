@@ -2,7 +2,10 @@
 
 namespace Mortezaa97\SmsManager;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Mortezaa97\SmsManager\Models\SmsMessage;
+use Mortezaa97\SmsManager\Policies\SmsMessagePolicy;
 
 class SmsManagerServiceProvider extends ServiceProvider
 {
@@ -11,36 +14,19 @@ class SmsManagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*
-         * Optional methods to load your package assets
-         */
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'sms-manager');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'sms-manager');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
+
+        Gate::policy(SmsMessage::class, SmsMessagePolicy::class);
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('sms-manager.php'),
+                __DIR__ . '/../config/config.php' => config_path('sms-manager.php'),
             ], 'config');
 
-            // Publishing the views.
-            /*$this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/sms-manager'),
-            ], 'views');*/
-
-            // Publishing assets.
-            /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/sms-manager'),
-            ], 'assets');*/
-
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/sms-manager'),
-            ], 'lang');*/
-
-            // Registering package commands.
-            // $this->commands([]);
+            $this->publishes([
+                __DIR__ . '/../database/migrations' => database_path('migrations'),
+            ], 'migrations');
         }
     }
 
