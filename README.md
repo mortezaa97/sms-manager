@@ -1,14 +1,10 @@
-# Very short description of the package
+# Sms Manager for Filament PHP
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mortezaa97/sms-manager.svg?style=flat-square)](https://packagist.org/packages/mortezaa97/sms-manager)
-[![Total Downloads](https://img.shields.io/packagist/dt/mortezaa97/sms-manager.svg?style=flat-square)](https://packagist.org/packages/mortezaa97/sms-manager)
-![GitHub Actions](https://github.com/mortezaa97/sms-manager/actions/workflows/main.yml/badge.svg)
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+A simple Filament plugin to add SMS statistics and management widgets to your dashboard.
 
 ## Installation
 
-You can install the package via composer:
+Install via composer:
 
 ```bash
 composer require mortezaa97/sms-manager
@@ -16,37 +12,51 @@ composer require mortezaa97/sms-manager
 
 ## Usage
 
+1. **Register the Plugin**
+
+In your `AdminPanelServiceProvider.php`, register the plugin in the plugins array:
+
 ```php
-// Usage description here
+use Mortezaa97\SmsManager\SmsManagerPlugin;
+
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        // ...
+        ->plugins([
+            // ... other plugins
+            SmsManagerPlugin::make(),
+        ]);
+}
 ```
 
-### Testing
+2. **Add the Widget to Your Dashboard**
 
-```bash
-composer test
+In `app/Filament/Pages/Dashboard.php`, add the widget to the `getWidgets()` method:
+
+```php
+public function getWidgets(): array
+{
+    return [
+        // ... other widgets
+        \Mortezaa97\SmsManager\Filament\Widgets\SmsManagerStatsWidget::class,
+    ];
+}
 ```
 
-### Changelog
+## Features
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+- Shows SMS statistics on your Filament dashboard.
+- Easy integration with existing Filament panels and widgets.
 
-## Contributing
+## Customization
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-### Security
-
-If you discover any security related issues, please email mortezajafari76@gmail.com instead of using the issue tracker.
+You can customize or extend the widget by creating your own widget or forking this package.
 
 ## Credits
 
--   [Morteza jafari](https://github.com/mortezaa97)
--   [All Contributors](../../contributors)
+Created by [mortezaa97](https://github.com/mortezaa97)
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
+MIT

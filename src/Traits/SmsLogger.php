@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Mortezaa97\SmsManager\Traits;
 
 use App\Enums\Status;
-use App\Models\SmsMessage;
+use Mortezaa97\SmsManager\Models\SmsMessage;
 
 trait SmsLogger
 {
