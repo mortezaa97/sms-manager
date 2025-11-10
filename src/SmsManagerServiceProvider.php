@@ -4,7 +4,9 @@ namespace Mortezaa97\SmsManager;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Mortezaa97\SmsManager\Models\SmsBlacklist;
 use Mortezaa97\SmsManager\Models\SmsMessage;
+use Mortezaa97\SmsManager\Policies\SmsBlacklistPolicy;
 use Mortezaa97\SmsManager\Policies\SmsMessagePolicy;
 
 class SmsManagerServiceProvider extends ServiceProvider
@@ -18,6 +20,7 @@ class SmsManagerServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
 
         Gate::policy(SmsMessage::class, SmsMessagePolicy::class);
+        Gate::policy(SmsBlacklist::class, SmsBlacklistPolicy::class);
 
         if ($this->app->runningInConsole()) {
             $this->publishes([

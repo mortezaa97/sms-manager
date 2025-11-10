@@ -7,6 +7,7 @@ namespace Mortezaa97\SmsManager;
 use Filament\Contracts\Plugin;
 use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
+use Mortezaa97\SmsManager\Filament\Resources\SmsBlacklists\SmsBlacklistResource;
 use Mortezaa97\SmsManager\Filament\Resources\SmsMessages\SmsMessageResource;
 use Mortezaa97\SmsManager\Filament\Widgets\SmsManagerStatsWidget;
 
@@ -40,6 +41,7 @@ class SmsManagerPlugin implements Plugin
         $panel
             ->resources([
                 'SmsMessageResource' => SmsMessageResource::class,
+                'SmsBlacklistResource' => SmsBlacklistResource::class,
             ])
             ->widgets([
                 SmsManagerStatsWidget::class,
