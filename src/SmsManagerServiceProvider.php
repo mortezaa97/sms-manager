@@ -45,5 +45,6 @@ class SmsManagerServiceProvider extends ServiceProvider
         $this->app->singleton('sms-manager', function () {
             return new SmsManager;
         });
+        $this->app->alias('sms-manager', SmsManager::class);
     }
 }
