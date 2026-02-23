@@ -11,6 +11,7 @@ use Mortezaa97\SmsManager\Filament\Resources\SmsBlacklists\SmsBlacklistResource;
 use Mortezaa97\SmsManager\Filament\Resources\SmsMessages\SmsMessageResource;
 use Mortezaa97\SmsManager\Filament\Resources\SmsPatterns\SmsPatternResource;
 use Mortezaa97\SmsManager\Filament\Resources\SmsDrivers\SmsDriverResource;
+use Mortezaa97\SmsManager\Filament\Resources\SmsGroups\SmsGroupResource;
 use Mortezaa97\SmsManager\Filament\Widgets\SmsManagerStatsWidget;
 
 class SmsManagerPlugin implements Plugin
@@ -46,6 +47,7 @@ class SmsManagerPlugin implements Plugin
                 'SmsBlacklistResource' => SmsBlacklistResource::class,
                 'SmsPatternResource' => SmsPatternResource::class,
                 'SmsDriverResource' => SmsDriverResource::class,
+                'SmsGroupResource' => SmsGroupResource::class,
             ])
             ->widgets([
                 SmsManagerStatsWidget::class,

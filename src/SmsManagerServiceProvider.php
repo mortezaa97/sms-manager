@@ -8,10 +8,14 @@ use Mortezaa97\SmsManager\Models\SmsBlacklist;
 use Mortezaa97\SmsManager\Models\SmsMessage;
 use Mortezaa97\SmsManager\Models\SmsPattern;
 use Mortezaa97\SmsManager\Models\SmsDriver;
+use Mortezaa97\SmsManager\Models\SmsGroup;
+use Mortezaa97\SmsManager\Models\SmsModelHasGroup;
 use Mortezaa97\SmsManager\Policies\SmsBlacklistPolicy;
 use Mortezaa97\SmsManager\Policies\SmsMessagePolicy;
 use Mortezaa97\SmsManager\Policies\SmsPatternPolicy;
 use Mortezaa97\SmsManager\Policies\SmsDriverPolicy;
+use Mortezaa97\SmsManager\Policies\SmsGroupPolicy;
+use Mortezaa97\SmsManager\Policies\SmsModelHasGroupPolicy;
 
 class SmsManagerServiceProvider extends ServiceProvider
 {
@@ -27,6 +31,8 @@ class SmsManagerServiceProvider extends ServiceProvider
         Gate::policy(SmsBlacklist::class, SmsBlacklistPolicy::class);
         Gate::policy(SmsPattern::class, SmsPatternPolicy::class);
         Gate::policy(SmsDriver::class, SmsDriverPolicy::class);
+        Gate::policy(SmsGroup::class, SmsGroupPolicy::class);
+        Gate::policy(SmsModelHasGroup::class, SmsModelHasGroupPolicy::class);
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
