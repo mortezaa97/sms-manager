@@ -9,6 +9,8 @@ use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Mortezaa97\SmsManager\Filament\Resources\SmsBlacklists\SmsBlacklistResource;
 use Mortezaa97\SmsManager\Filament\Resources\SmsMessages\SmsMessageResource;
+use Mortezaa97\SmsManager\Filament\Resources\SmsPatterns\SmsPatternResource;
+use Mortezaa97\SmsManager\Filament\Resources\SmsDrivers\SmsDriverResource;
 use Mortezaa97\SmsManager\Filament\Widgets\SmsManagerStatsWidget;
 
 class SmsManagerPlugin implements Plugin
@@ -42,6 +44,8 @@ class SmsManagerPlugin implements Plugin
             ->resources([
                 'SmsMessageResource' => SmsMessageResource::class,
                 'SmsBlacklistResource' => SmsBlacklistResource::class,
+                'SmsPatternResource' => SmsPatternResource::class,
+                'SmsDriverResource' => SmsDriverResource::class,
             ])
             ->widgets([
                 SmsManagerStatsWidget::class,

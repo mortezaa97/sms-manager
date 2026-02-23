@@ -6,8 +6,12 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Mortezaa97\SmsManager\Models\SmsBlacklist;
 use Mortezaa97\SmsManager\Models\SmsMessage;
+use Mortezaa97\SmsManager\Models\SmsPattern;
+use Mortezaa97\SmsManager\Models\SmsDriver;
 use Mortezaa97\SmsManager\Policies\SmsBlacklistPolicy;
 use Mortezaa97\SmsManager\Policies\SmsMessagePolicy;
+use Mortezaa97\SmsManager\Policies\SmsPatternPolicy;
+use Mortezaa97\SmsManager\Policies\SmsDriverPolicy;
 
 class SmsManagerServiceProvider extends ServiceProvider
 {
@@ -21,6 +25,8 @@ class SmsManagerServiceProvider extends ServiceProvider
 
         Gate::policy(SmsMessage::class, SmsMessagePolicy::class);
         Gate::policy(SmsBlacklist::class, SmsBlacklistPolicy::class);
+        Gate::policy(SmsPattern::class, SmsPatternPolicy::class);
+        Gate::policy(SmsDriver::class, SmsDriverPolicy::class);
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
@@ -29,7 +35,7 @@ class SmsManagerServiceProvider extends ServiceProvider
 
             $this->publishes([
                 __DIR__ . '/../database/migrations' => database_path('migrations'),
-            ], 'migrations');
+            ], 'sms-manager-migrations');
         }
     }
 

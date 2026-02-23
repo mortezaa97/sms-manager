@@ -17,30 +17,30 @@ trait SmsLogger
      * @param string|null $sender   Sender info (nullable).
      * @param float|int|null $cost  Cost of SMS (nullable, null or 0 meaning no cost/failed).
      * @param string|null $action   Action/context (e.g. 'otp').
-     * 
+     * @param int|null $driverId    Optional driver_id (uses default driver if null).
+     * @param int|null $patternId   Optional pattern_id.
+     *
      * If cost is present and nonzero, log as SENT; otherwise as FAILED.
      */
-    public static function Log($message, $receiver, $sender = null, $cost = null, $action = null): void
+    public static function Log($message, $receiver, $sender = null, $cost = null, $action = null, $driverId = null, $patternId = null): void
     {
-        // If cost is not null and is greater than 0, log as SENT; otherwise assume fail
+        $driverId = $driverId ?? \Mortezaa97\SmsManager\Models\SmsDriver::where('is_default', true)->first()?->id
+            ?? \Mortezaa97\SmsManager\Models\SmsDriver::query()->first()?->id;
+
+        $base = [
+            'message' => $message,
+            'receiver' => $receiver,
+            'sender' => $sender,
+            'cost' => $cost ?? 0,
+            'action' => $action,
+            'driver_id' => $driverId,
+            'pattern_id' => $patternId,
+        ];
+
         if ($cost !== null && $cost > 0) {
-            SmsMessage::create([
-                'message' => $message,
-                'receiver' => $receiver,
-                'cost' => $cost,
-                'sender' => $sender,
-                'action' => $action,
-                'status' => Status::SENT->value,
-            ]);
+            SmsMessage::create(array_merge($base, ['status' => Status::SENT->value, 'cost' => $cost]));
         } else {
-            SmsMessage::create([
-                'message' => $message,
-                'receiver' => $receiver,
-                'sender' => $sender,
-                'cost' => $cost ?? 0,
-                'action' => $action,
-                'status' => Status::FAILED->value,
-            ]);
+            SmsMessage::create(array_merge($base, ['status' => Status::FAILED->value]));
         }
     }
 }

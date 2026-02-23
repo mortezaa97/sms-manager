@@ -18,7 +18,7 @@ class SmsMessageResource extends Resource
     protected static ?string $model = SmsMessage::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    protected static ?string $recordTitleAttribute = 'title';
+    protected static ?string $recordTitleAttribute = 'message';
 
     protected static ?string $navigationLabel = 'پیامک ها';
 

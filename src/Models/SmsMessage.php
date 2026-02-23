@@ -2,47 +2,38 @@
 
 namespace Mortezaa97\SmsManager\Models;
 
-use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Builder;
 
 class SmsMessage extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
+    protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
 
-    protected $guarded = [
-        'id',
-        'created_at',
-        'updated_at'
+    protected $casts = [
+        'cost' => 'decimal:0',
     ];
 
-    protected $appends = [];
-    protected $with = [];
-
-    protected static function boot(){
+    protected static function boot(): void
+    {
         parent::boot();
-        static::addGlobalScope('order', function (Builder $builder) {
+        static::addGlobalScope('order', function (Builder $builder): void {
             $builder->orderByDesc('created_at');
         });
     }
 
-
-
-    /*
-    * Relations
-    */
-    public function createdBy(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function driver(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-    public function updatedBy(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(User::class, 'updated_by');
+        return $this->belongsTo(SmsDriver::class, 'driver_id');
     }
 
+    public function pattern(): BelongsTo
+    {
+        return $this->belongsTo(SmsPattern::class, 'pattern_id');
+    }
 }
 

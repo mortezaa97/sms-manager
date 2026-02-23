@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mortezaa97\SmsManager;
 
 use Mortezaa97\SmsManager\Contracts\SmsDriverInterface;
+use Mortezaa97\SmsManager\Models\SmsPattern;
 use Mortezaa97\SmsManager\Traits\SmsLogger;
 
 class SmsManager
@@ -24,10 +25,10 @@ class SmsManager
         return $this->driver;
     }
 
-    public function send(string $receptor, string $message, ?string $sender = null, string $action = 'manual'): array
+    public function send(string $receptor, string $message, ?string $sender = null, string $action = 'manual', ?int $driverId = null, ?int $patternId = null): array
     {
         $result = $this->driver()->send($receptor, $message, $sender);
-        $this->logResult($result, $receptor, $message, $action);
+        $this->logResult($result, $receptor, $message, $action, $driverId, $patternId);
         return $result;
     }
 
@@ -35,7 +36,7 @@ class SmsManager
      * @param  array<int, string>  $receptors
      * @return array<int, array>
      */
-    public function sendToMany(array $receptors, string $message, ?string $sender = null, string $action = 'manual'): array
+    public function sendToMany(array $receptors, string $message, ?string $sender = null, string $action = 'manual', ?int $driverId = null, ?int $patternId = null): array
     {
         $receptors = array_values(array_filter(array_map(function ($r) {
             return preg_replace('/\s+/', '', (string) $r);
@@ -47,7 +48,7 @@ class SmsManager
         foreach ($results as $idx => $result) {
             $arr = is_array($result) ? $result : (array) $result;
             $receptor = $arr['receptor'] ?? $receptors[$idx] ?? '';
-            $this->logResult($arr, $receptor, $message, $action);
+            $this->logResult($arr, $receptor, $message, $action, $driverId, $patternId);
         }
         return $results;
     }
@@ -94,12 +95,12 @@ class SmsManager
     /**
      * @param  array{messageid?: int, cost?: int, status?: int, statustext?: string, sender?: string, receptor?: string}  $result
      */
-    protected function logResult(array $result, string $receptor, string $message, string $action): void
+    protected function logResult(array $result, string $receptor, string $message, string $action, ?int $driverId = null, ?int $patternId = null): void
     {
         $cost = $result['cost'] ?? 0;
         $sender = $result['sender'] ?? null;
         $status = (int) ($result['status'] ?? 0);
         $success = $status === 200 || $status === 1 || $status === 4 || $status === 5 || $status === 10;
-        self::Log($message, $receptor, $sender, $success ? (int) $cost : 0, $action);
+        self::Log($message, $receptor, $sender, $success ? (int) $cost : 0, $action, $driverId, $patternId);
     }
 }
