@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Enums\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -20,6 +22,7 @@ return new class extends Migration
             $table->decimal('cost', 19, 0)->default(0);
             $table->string('action')->nullable();
             $table->string('status')->default(Status::SENT->value);
+            $table->longText('logs')->nullable();
             $table->foreignId('driver_id')->nullable()->constrained('sms_drivers');
             $table->foreignId('pattern_id')->nullable()->constrained('sms_patterns');
             $table->softDeletes();

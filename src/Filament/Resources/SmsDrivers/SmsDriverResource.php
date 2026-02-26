@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Filament\Resources\SmsDrivers;
 
 use BackedEnum;
@@ -11,6 +13,7 @@ use Mortezaa97\SmsManager\Filament\Resources\SmsDrivers\Pages\ListSmsDrivers;
 use Mortezaa97\SmsManager\Filament\Resources\SmsDrivers\Schemas\SmsDriverForm;
 use Mortezaa97\SmsManager\Filament\Resources\SmsDrivers\Tables\SmsDriversTable;
 use Mortezaa97\SmsManager\Models\SmsDriver;
+use UnitEnum;
 
 class SmsDriverResource extends Resource
 {
@@ -24,7 +27,7 @@ class SmsDriverResource extends Resource
 
     protected static ?string $pluralModelLabel = 'درگاه های پیامک';
 
-    protected static string|null|\UnitEnum $navigationGroup = 'پنل پیامکی';
+    protected static string|null|UnitEnum $navigationGroup = 'پنل پیامکی';
 
     public static function form(Schema $schema): Schema
     {

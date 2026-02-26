@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Http\Resources;
 
 use Illuminate\Http\Request;
@@ -17,5 +19,3 @@ class SmsBlacklistResource extends JsonResource
         return [];
     }
 }
-
-

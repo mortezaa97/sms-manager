@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Filament\Resources\SmsBlacklists\Schemas;
 
 use Filament\Schemas\Schema;
@@ -40,5 +42,3 @@ class SmsBlacklistForm
             ->columns(12);
     }
 }
-
-

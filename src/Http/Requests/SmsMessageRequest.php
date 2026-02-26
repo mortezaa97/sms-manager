@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -26,4 +28,3 @@ class SmsMessageRequest extends FormRequest
         ];
     }
 }
-

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Filament\Resources\SmsDrivers\Schemas;
 
 use Filament\Forms\Components\Textarea;
@@ -25,7 +27,27 @@ class SmsDriverForm
                         ->columnSpanFull(),
                     TextInput::make('sender')
                         ->label('فرستنده')
-                        ->maxLength(255),
+                        ->maxLength(255)
+                        ->nullable(),
+                    TextInput::make('username')
+                        ->label('نام کاربری')
+                        ->maxLength(255)
+                        ->nullable(),
+                    TextInput::make('password')
+                        ->label('رمز عبور')
+                        ->password()
+                        ->maxLength(255)
+                        ->nullable()
+                        ->dehydrated(fn ($state) => filled($state)),
+                    Toggle::make('allow_single')
+                        ->label('امکان ارسال تکی')
+                        ->default(true),
+                    Toggle::make('allow_bulk')
+                        ->label('امکان ارسال گروهی')
+                        ->default(true),
+                    Toggle::make('allow_pattern')
+                        ->label('امکان ارسال الگو')
+                        ->default(true),
                     Toggle::make('is_default')
                         ->label('پیش‌فرض')
                         ->default(false),

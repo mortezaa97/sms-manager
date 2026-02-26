@@ -35,6 +35,7 @@ class AddToSmsGroupAction
                         ->title('مدل از قابلیت گروه پیامکی پشتیبانی نمی‌کند')
                         ->danger()
                         ->send();
+
                     return;
                 }
                 $cellphone = $data['cellphone'] ?? ($cellphoneAttribute ? ($record->{$cellphoneAttribute} ?? null) : null);
@@ -69,6 +70,7 @@ class AddToSmsGroupAction
                         ->title('گروه را انتخاب کنید')
                         ->danger()
                         ->send();
+
                     return;
                 }
                 $added = 0;
@@ -108,6 +110,7 @@ class AddToSmsGroupAction
                 ->placeholder($cellphoneAttribute ? 'خالی = استفاده از شماره رکورد' : '')
                 ->default($cellphoneAttribute ? fn ($record) => $record?->{$cellphoneAttribute} ?? null : null),
         ];
+
         return $components;
     }
 

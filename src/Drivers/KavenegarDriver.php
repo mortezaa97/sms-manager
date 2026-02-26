@@ -22,7 +22,7 @@ class KavenegarDriver implements SmsDriverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function send(string $receptor, string $message, ?string $sender = null): array
     {
@@ -42,7 +42,7 @@ class KavenegarDriver implements SmsDriverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function sendToMany(array $receptors, string $message, ?string $sender = null): array
     {
@@ -56,13 +56,12 @@ class KavenegarDriver implements SmsDriverInterface
         if (isset($result['entries']) && is_array($result['entries'])) {
             return $result['entries'];
         }
+
         return [$result];
     }
 
     /**
-     * Kavenegar Verify Lookup (OTP/template) - see https://kavenegar.com/rest.html#Lookup
-     *
-     * @param  array<string, mixed>  $result
+     * Kavenegar Verify Lookup (OTP/template) - see https://kavenegar.com/rest.html#Lookup.
      */
     public function verifyLookup(
         string $receptor,
@@ -97,6 +96,7 @@ class KavenegarDriver implements SmsDriverInterface
         $status = (int) ($return['status'] ?? 0);
         $entries = $json['entries'] ?? [];
         $first = is_array($entries) && isset($entries[0]) ? $entries[0] : $entries;
+
         return [
             'status' => $status,
             'messageid' => (int) ($first['messageid'] ?? 0),
@@ -129,6 +129,7 @@ class KavenegarDriver implements SmsDriverInterface
 
         if (is_array($entries) && isset($entries[0])) {
             $first = $entries[0];
+
             return [
                 'messageid' => (int) ($first['messageid'] ?? 0),
                 'cost' => (int) ($first['cost'] ?? 0),

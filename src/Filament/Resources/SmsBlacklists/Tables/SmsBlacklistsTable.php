@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Filament\Resources\SmsBlacklists\Tables;
 
 use Filament\Actions\BulkActionGroup;
@@ -41,5 +43,3 @@ class SmsBlacklistsTable
             ]);
     }
 }
-
-

@@ -28,7 +28,7 @@ class SmsIrDriver implements SmsDriverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function send(string $receptor, string $message, ?string $sender = null): array
     {
@@ -47,13 +47,15 @@ class SmsIrDriver implements SmsDriverInterface
             $first = $result['entries'][0];
             $first['cost'] = (int) ($result['total_cost'] ?? array_sum(array_column($result['entries'], 'cost')));
             $first['receptor'] = $receptor;
+
             return $first;
         }
+
         return $result;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      * SMS.ir bulk API allows max 100 mobiles per request; we chunk and merge results.
      */
     public function sendToMany(array $receptors, string $message, ?string $sender = null): array
@@ -73,6 +75,7 @@ class SmsIrDriver implements SmsDriverInterface
                 $allEntries = array_merge($allEntries, $result['entries']);
             }
         }
+
         return $allEntries;
     }
 

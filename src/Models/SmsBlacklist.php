@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Models;
 
 use App\Models\User;
@@ -20,6 +22,7 @@ class SmsBlacklist extends Model
     ];
 
     protected $appends = [];
+
     protected $with = [];
 
     protected static function boot()
@@ -41,5 +44,3 @@ class SmsBlacklist extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 }
-
-

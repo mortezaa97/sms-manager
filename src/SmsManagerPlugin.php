@@ -8,10 +8,10 @@ use Filament\Contracts\Plugin;
 use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Mortezaa97\SmsManager\Filament\Resources\SmsBlacklists\SmsBlacklistResource;
-use Mortezaa97\SmsManager\Filament\Resources\SmsMessages\SmsMessageResource;
-use Mortezaa97\SmsManager\Filament\Resources\SmsPatterns\SmsPatternResource;
 use Mortezaa97\SmsManager\Filament\Resources\SmsDrivers\SmsDriverResource;
 use Mortezaa97\SmsManager\Filament\Resources\SmsGroups\SmsGroupResource;
+use Mortezaa97\SmsManager\Filament\Resources\SmsMessages\SmsMessageResource;
+use Mortezaa97\SmsManager\Filament\Resources\SmsPatterns\SmsPatternResource;
 use Mortezaa97\SmsManager\Filament\Widgets\SmsManagerStatsWidget;
 
 class SmsManagerPlugin implements Plugin
@@ -28,7 +28,7 @@ class SmsManagerPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        // To add the SmsManagerStatsWidget to the Dashboard page, 
+        // To add the SmsManagerStatsWidget to the Dashboard page,
         // you should add it in the dashboard's getWidgets() method, NOT here.
         // See your app/Filament/Pages/Dashboard.php:
         // public function getWidgets(): array
@@ -39,7 +39,7 @@ class SmsManagerPlugin implements Plugin
         //         ...,
         //     ];
         // }
-        
+
         // Optionally, you can still register widgets for custom pages or global dashboard:
         $panel
             ->resources([

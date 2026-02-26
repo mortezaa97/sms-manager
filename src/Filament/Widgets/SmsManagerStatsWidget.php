@@ -7,9 +7,8 @@ namespace Mortezaa97\SmsManager\Filament\Widgets;
 use App\Enums\Status;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Mortezaa97\SmsManager\Models\SmsMessage;
 
 class SmsManagerStatsWidget extends BaseWidget
@@ -26,7 +25,7 @@ class SmsManagerStatsWidget extends BaseWidget
         $successRate = $total > 0 ? round(($sent / $total) * 100) : 0;
 
         // Placeholder: Fetch actual SMS credit from provider here if possible
-        $remainingCredit = number_format(100000 - ($sentQuery->sum('cost')/10)) . ' تومان';
+        $remainingCredit = number_format(100000 - ($sentQuery->sum('cost') / 10)) . ' تومان';
 
         // Generate past 7 days' dates (including today), oldest first
         $dates = collect();
@@ -35,7 +34,7 @@ class SmsManagerStatsWidget extends BaseWidget
         }
 
         $sentPerDay = SmsMessage::withoutGlobalScope('order')
-            ->selectRaw("DATE(created_at) as day, count(*) as count")
+            ->selectRaw('DATE(created_at) as day, count(*) as count')
             ->where('status', Status::SENT->value)
             ->where('created_at', '>=', Carbon::today()->subDays(6)->startOfDay())
             ->groupByRaw('DATE(created_at)')
@@ -43,7 +42,7 @@ class SmsManagerStatsWidget extends BaseWidget
             ->pluck('count', 'day');
 
         $failedPerDay = SmsMessage::withoutGlobalScope('order')
-            ->selectRaw("DATE(created_at) as day, count(*) as count")
+            ->selectRaw('DATE(created_at) as day, count(*) as count')
             ->where('status', Status::FAILED->value)
             ->where('created_at', '>=', Carbon::today()->subDays(6)->startOfDay())
             ->groupByRaw('DATE(created_at)')
@@ -51,7 +50,7 @@ class SmsManagerStatsWidget extends BaseWidget
             ->pluck('count', 'day');
 
         $totalPerDay = SmsMessage::withoutGlobalScope('order')
-            ->selectRaw("DATE(created_at) as day, count(*) as count")
+            ->selectRaw('DATE(created_at) as day, count(*) as count')
             ->where('created_at', '>=', Carbon::today()->subDays(6)->startOfDay())
             ->groupByRaw('DATE(created_at)')
             ->orderBy('day')

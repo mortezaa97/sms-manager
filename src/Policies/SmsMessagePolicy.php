@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Policies;
 
-use Mortezaa97\SmsManager\Models\SmsMessage;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use Mortezaa97\SmsManager\Models\SmsMessage;
 
 class SmsMessagePolicy
 {
@@ -64,4 +65,3 @@ class SmsMessagePolicy
         return $user->hasRole('admin');
     }
 }
-

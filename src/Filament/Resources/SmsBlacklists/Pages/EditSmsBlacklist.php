@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Filament\Resources\SmsBlacklists\Pages;
 
 use Filament\Actions\DeleteAction;
@@ -21,5 +23,3 @@ class EditSmsBlacklist extends EditRecord
         ];
     }
 }
-
-

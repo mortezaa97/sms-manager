@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Filament\Resources\SmsPatterns;
 
 use BackedEnum;
@@ -11,6 +13,7 @@ use Mortezaa97\SmsManager\Filament\Resources\SmsPatterns\Pages\ListSmsPatterns;
 use Mortezaa97\SmsManager\Filament\Resources\SmsPatterns\Schemas\SmsPatternForm;
 use Mortezaa97\SmsManager\Filament\Resources\SmsPatterns\Tables\SmsPatternsTable;
 use Mortezaa97\SmsManager\Models\SmsPattern;
+use UnitEnum;
 
 class SmsPatternResource extends Resource
 {
@@ -24,7 +27,7 @@ class SmsPatternResource extends Resource
 
     protected static ?string $pluralModelLabel = 'الگوهای پیامک';
 
-    protected static string|null|\UnitEnum $navigationGroup = 'پنل پیامکی';
+    protected static string|null|UnitEnum $navigationGroup = 'پنل پیامکی';
 
     public static function form(Schema $schema): Schema
     {

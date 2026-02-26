@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Filament\Resources\SmsMessages\Tables;
 
+use App\Filament\Components\Table\StatusTextColumn;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\ForceDeleteBulkAction;
@@ -9,6 +12,7 @@ use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Mortezaa97\SmsManager\Models\SmsMessage;
 
 class SmsMessagesTable
 {
@@ -25,8 +29,8 @@ class SmsMessagesTable
                 TextColumn::make('pattern.title')->label('الگو')->sortable()->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('cost')->label('هزینه')->suffix(' ریال')->sortable(),
                 TextColumn::make('action')->label('علت ارسال')->searchable()->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('status')->label('وضعیت')->badge()->sortable(),
-                TextColumn::make('created_at')->label('تاریخ')->sortable()->dateTime(),
+                StatusTextColumn::create(SmsMessage::class),
+                TextColumn::make('created_at')->label('تاریخ')->sortable()->jalaliDateTime('j F Y ساعت H:i')->toggleable(isToggledHiddenByDefault: false),
             ])
             ->filters([
                 TrashedFilter::make(),
@@ -41,4 +45,3 @@ class SmsMessagesTable
             ]);
     }
 }
-

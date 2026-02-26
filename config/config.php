@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * You can place your custom package configuration in here.
  */
@@ -25,6 +27,17 @@ return [
         'smsir' => [
             'api_key' => env('SMSIR_API_KEY'),
             'line_number' => env('SMSIR_LINE_NUMBER', ''),
+        ],
+        'iranpayamak' => [
+            'api_key' => env('IRANPAYAMAK_API_KEY'),
+            'username' => env('IRANPAYAMAK_USERNAME'),
+            'password' => env('IRANPAYAMAK_PASSWORD'),
+            'sender' => env('IRANPAYAMAK_SENDER', null),
+        ],
+        'farapayamak' => [
+            'username' => env('FARAPAYAMAK_USERNAME'),
+            'password' => env('FARAPAYAMAK_PASSWORD'), // or ApiKey from developer settings
+            'sender' => env('FARAPAYAMAK_SENDER', null),
         ],
     ],
 

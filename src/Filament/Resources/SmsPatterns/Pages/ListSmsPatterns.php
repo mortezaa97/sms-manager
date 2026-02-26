@@ -1,17 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Filament\Resources\SmsPatterns\Pages;
 
+use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Support\HtmlString;
+use Filament\Schemas\Components\EmptyState;
+use Filament\Support\Icons\Heroicon;
 use Mortezaa97\SmsManager\Filament\Resources\SmsDrivers\SmsDriverResource;
 use Mortezaa97\SmsManager\Filament\Resources\SmsPatterns\Schemas\SmsPatternForm;
 use Mortezaa97\SmsManager\Filament\Resources\SmsPatterns\SmsPatternResource;
 use Mortezaa97\SmsManager\Models\SmsDriver;
-use Filament\Actions\Action;
-use Filament\Schemas\Components\EmptyState;
-use Filament\Support\Icons\Heroicon;
 
 class ListSmsPatterns extends ListRecords
 {

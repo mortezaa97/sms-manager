@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Filament\Resources\SmsDrivers\Pages;
 
 use Filament\Actions\CreateAction;

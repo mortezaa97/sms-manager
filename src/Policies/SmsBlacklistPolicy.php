@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Policies;
 
 use App\Models\User;
@@ -42,5 +44,3 @@ class SmsBlacklistPolicy
         return $user->hasRole('admin');
     }
 }
-
-

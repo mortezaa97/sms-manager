@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Filament\Resources\SmsGroups;
 
 use BackedEnum;
@@ -13,6 +15,7 @@ use Mortezaa97\SmsManager\Filament\Resources\SmsGroups\RelationManagers\ModelHas
 use Mortezaa97\SmsManager\Filament\Resources\SmsGroups\Schemas\SmsGroupForm;
 use Mortezaa97\SmsManager\Filament\Resources\SmsGroups\Tables\SmsGroupsTable;
 use Mortezaa97\SmsManager\Models\SmsGroup;
+use UnitEnum;
 
 class SmsGroupResource extends Resource
 {
@@ -26,7 +29,7 @@ class SmsGroupResource extends Resource
 
     protected static ?string $pluralModelLabel = 'گروه‌های پیامکی';
 
-    protected static string|null|\UnitEnum $navigationGroup = 'پنل پیامکی';
+    protected static string|null|UnitEnum $navigationGroup = 'پنل پیامکی';
 
     public static function form(Schema $schema): Schema
     {

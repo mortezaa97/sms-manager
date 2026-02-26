@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -24,7 +27,7 @@ class SmsBlacklistController
         try {
             DB::beginTransaction();
             DB::commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response()->json($exception->getMessage(), 419);
         }
 
@@ -45,7 +48,7 @@ class SmsBlacklistController
         try {
             DB::beginTransaction();
             DB::commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response()->json($exception->getMessage(), 419);
         }
 
@@ -59,12 +62,10 @@ class SmsBlacklistController
         try {
             DB::beginTransaction();
             DB::commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response()->json($exception->getMessage(), 419);
         }
 
         return response()->json('با موفقیت حذف شد');
     }
 }
-
-

@@ -14,7 +14,7 @@ use Filament\Schemas\Components\Utilities\Get;
 use Illuminate\Support\Collection;
 use Mortezaa97\SmsManager\Models\SmsDriver;
 use Mortezaa97\SmsManager\Models\SmsPattern;
-use Mortezaa97\SmsManager\SmsManager;
+use Throwable;
 
 class SendSmsAction
 {
@@ -38,6 +38,7 @@ class SendSmsAction
                         ->title('شماره گیرنده موجود نیست')
                         ->danger()
                         ->send();
+
                     return;
                 }
                 self::sendOne($phone, $data);
@@ -65,6 +66,7 @@ class SendSmsAction
                         ->title('هیچ شماره‌ای در رکوردهای انتخاب شده یافت نشد')
                         ->danger()
                         ->send();
+
                     return;
                 }
                 self::sendMany($receptors, $data);
@@ -92,6 +94,7 @@ class SendSmsAction
                         ->title('حداقل یک شماره گیرنده وارد کنید')
                         ->danger()
                         ->send();
+
                     return;
                 }
                 if (count($receptors) === 1) {
@@ -130,6 +133,7 @@ class SendSmsAction
                 if (! filled($driverId)) {
                     return [];
                 }
+
                 return SmsPattern::query()
                     ->where('driver', $driverId)
                     ->get()
@@ -148,6 +152,7 @@ class SendSmsAction
             ->default(fn (Get $get): string => $get('pattern_id') ? SmsPattern::find($get('pattern_id'))->message : '')
             ->maxLength(900)
             ->rows(4);
+
         return $components;
     }
 
@@ -166,7 +171,7 @@ class SendSmsAction
                 ->title('پیامک ارسال شد')
                 ->success()
                 ->send();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             Notification::make()
                 ->title('خطا در ارسال پیامک')
                 ->body($e->getMessage())
@@ -191,7 +196,7 @@ class SendSmsAction
                 ->title('پیامک‌ها ارسال شد')
                 ->success()
                 ->send();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             Notification::make()
                 ->title('خطا در ارسال پیامک')
                 ->body($e->getMessage())

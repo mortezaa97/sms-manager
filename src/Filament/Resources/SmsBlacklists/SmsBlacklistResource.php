@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mortezaa97\SmsManager\Filament\Resources\SmsBlacklists;
 
 use BackedEnum;
@@ -15,6 +17,7 @@ use Mortezaa97\SmsManager\Filament\Resources\SmsBlacklists\Pages\ListSmsBlacklis
 use Mortezaa97\SmsManager\Filament\Resources\SmsBlacklists\Schemas\SmsBlacklistForm;
 use Mortezaa97\SmsManager\Filament\Resources\SmsBlacklists\Tables\SmsBlacklistsTable;
 use Mortezaa97\SmsManager\Models\SmsBlacklist;
+use UnitEnum;
 
 class SmsBlacklistResource extends Resource
 {
@@ -23,13 +26,14 @@ class SmsBlacklistResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'لیست سیاه';
+
     protected static ?string $navigationLabel = 'لیست سیاه';
 
     protected static ?string $modelLabel = 'لیست سیاه';
 
     protected static ?string $pluralModelLabel = 'لیست سیاه';
 
-    protected static string|null|\UnitEnum $navigationGroup = 'پنل پیامکی';
+    protected static string|null|UnitEnum $navigationGroup = 'پنل پیامکی';
 
     public static function form(Schema $schema): Schema
     {
@@ -65,5 +69,3 @@ class SmsBlacklistResource extends Resource
             ]);
     }
 }
-
-
